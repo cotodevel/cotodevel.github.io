@@ -28,10 +28,10 @@
 			
 			$(document).ready(function(){
 				<!-- load the code from sources-->
-				$nds7Linker = 'https://raw.githubusercontent.com/cotodevel/ToolchainGenericDS/master/src/linkers/nds_arm7_ld.ld'
+				$nds7Linker = 'https://raw.githubusercontent.com/cotodevel/newlib-nds/master/newlib-nds/linkers/nds_arm7_ld.ld'
 				loadXMLDoc("nds7ldCodeBlock", $nds7Linker);
 				
-				$ndsDSWNIFINetplay = 'https://raw.githubusercontent.com/cotodevel/ToolchainGenericDS/master/src/arm9/source/arm9_driver/dswnifi_lib.cpp'
+				$ndsDSWNIFINetplay = 'https://raw.githubusercontent.com/cotodevel/ToolchainGenericDS/master/src/arm9/source/arm9_driver/dswnifi_lib.c'
 				loadXMLDoc("ndsNetplayDSWnifiCodeBlock", $ndsDSWNIFINetplay);
 				
 				$ndsEWRAMZIPStorage1 = 'https://raw.githubusercontent.com/cotodevel/ToolchainGenericDS/master/src/arm9/source/arm9_driver/zip/zipSwapStack.S'
