@@ -28,16 +28,16 @@
 			
 			$(document).ready(function(){
 				<!-- load the code from sources-->
-				$nds7Linker = 'https://raw.githubusercontent.com/cotodevel/newlib-nds/master/newlib-nds/linkers/nds_arm7_ld.ld'
+				$nds7Linker = 'https://bitbucket.org/Coto88/newlib-nds/raw/dfacc79d6c457ab0e3669569315ba6889e0e337f/newlib-nds/linkers/nds_arm7_ld.ld'
 				loadXMLDoc("nds7ldCodeBlock", $nds7Linker);
 				
-				$ndsDSWNIFINetplay = 'https://raw.githubusercontent.com/cotodevel/ToolchainGenericDS/master/src/arm9/source/arm9_driver/dswnifi_lib.c'
+				$ndsDSWNIFINetplay = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/310309fd25f2db5c5ab571a0ab9915e7ffbd0d13/src/arm9/source/arm9_driver/dswnifi_lib.c'
 				loadXMLDoc("ndsNetplayDSWnifiCodeBlock", $ndsDSWNIFINetplay);
 				
-				$ndsEWRAMZIPStorage1 = 'https://raw.githubusercontent.com/cotodevel/ToolchainGenericDS/master/src/arm9/source/arm9_driver/zip/zipSwapStack.S'
+				$ndsEWRAMZIPStorage1 = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/310309fd25f2db5c5ab571a0ab9915e7ffbd0d13/src/arm9/source/arm9_driver/zip/zipSwapStack.S'
 				loadXMLDoc("ndsEWRAMZIPStorageCodeBlock1", $ndsEWRAMZIPStorage1);
 				
-				$ndsEWRAMZIPStorage2 = 'https://raw.githubusercontent.com/cotodevel/ToolchainGenericDS/master/src/arm9/source/arm9_driver/zip/xenofunzip.c'
+				$ndsEWRAMZIPStorage2 = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/310309fd25f2db5c5ab571a0ab9915e7ffbd0d13/src/arm9/source/arm9_driver/zip/xenofunzip.c'
 				loadXMLDoc("ndsEWRAMZIPStorageCodeBlock2", $ndsEWRAMZIPStorage2);
 				
 			});
