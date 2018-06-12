@@ -1093,7 +1093,7 @@
 			-ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
 			transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
 			background-position: center;
-			background-size: cover;
+			background-size: auto;
 			background-repeat: no-repeat;
 			z-index: 1;
 		}
@@ -1107,7 +1107,6 @@
 			-webkit-filter: blur(0.2rem);
 			-ms-filter: blur(0.2rem);
 			filter: blur(0.2rem);
-			mix-blend-mode: multiply;
 		}
 
 		body.is-loading #bg:before {
