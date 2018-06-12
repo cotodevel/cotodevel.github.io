@@ -8,6 +8,7 @@
 	<head>
 		<!-- Scripts -->
 		<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
 		<script src="assets/js/skel.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
@@ -40,6 +41,27 @@
 				$ndsEWRAMZIPStorage2 = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/310309fd25f2db5c5ab571a0ab9915e7ffbd0d13/src/arm9/source/arm9_driver/zip/xenofunzip.c'
 				loadXMLDoc("ndsEWRAMZIPStorageCodeBlock2", $ndsEWRAMZIPStorage2);
 				
+				var scene3d = document.getElementById("bg");
+				var scene = new THREE.Scene();
+				var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
+				var renderer = new THREE.WebGLRenderer();
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				document.body.appendChild(renderer.domElement);
+				var geometry = new THREE.BoxGeometry(1400, 1400, 1400, 10, 10, 10);
+				var material = new THREE.MeshBasicMaterial({color: 0x11111, wireframe: true});
+				var cube = new THREE.Mesh(geometry, material);
+				scene.add(cube);
+				camera.position.z = 1000;
+				
+				scene3d.appendChild(renderer.domElement);
+				function render() {
+					requestAnimationFrame(render);
+					cube.rotation.x += 0.01;
+					cube.rotation.y += 0.01;
+					renderer.render(scene, camera);
+				};
+				
+				render();				
 			});
 			
 		</script>
@@ -53,7 +75,6 @@
 		
 	</head>
 	<body>
-
 		<!-- Wrapper -->
 			<div id="wrapper">
 
