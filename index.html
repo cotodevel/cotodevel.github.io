@@ -27,8 +27,9 @@
 				xmlhttp.send();
 			}
 			
-			$(document).ready(function(){
+			
 				
+			$(document).ready(function(){
 				<!-- reload page if resized -->
 				$(window).bind('resize', function(e)
 				{
@@ -38,6 +39,14 @@
 					this.location.reload(false); /* false to get page from cache */
 				  }, 100);
 				});
+				
+				<!-- bind accelerometer handler -->
+				if(window.DeviceMotionEvent){
+				  window.addEventListener("devicemotion", motion, false);
+				  console.log("DeviceMotionEvent is supported!");
+				}else{
+				  console.log("DeviceMotionEvent is not supported");
+				}
 				
 				<!-- load the code from sources-->
 				$nds7Linker = 'https://bitbucket.org/Coto88/newlib-nds/raw/dfacc79d6c457ab0e3669569315ba6889e0e337f/newlib-nds/linkers/nds_arm7_ld.ld'
@@ -57,22 +66,30 @@
 				var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
 				var renderer = new THREE.WebGLRenderer();
 				renderer.setSize(window.innerWidth, window.innerHeight);
-				document.body.appendChild(renderer.domElement);
 				var geometry = new THREE.BoxGeometry(1400, 1400, 1400, 10, 10, 10);
-				var material = new THREE.MeshBasicMaterial({color: 0x11111, wireframe: true});
+				var material = new THREE.MeshBasicMaterial({color: 0x444444, wireframe: true});
 				var cube = new THREE.Mesh(geometry, material);
 				scene.add(cube);
 				camera.position.z = 1000;
-				
 				scene3d.appendChild(renderer.domElement);
 				function render() {
 					requestAnimationFrame(render);
-					cube.rotation.x += 0.01;
-					cube.rotation.y += 0.01;
+					cube.rotation.x += 0.0008;
+					cube.rotation.y += 0.0008;
 					renderer.render(scene, camera);
 				};
 				
-				render();				
+				function motion(event){
+				  console.log("Accelerometer: "
+					+ event.accelerationIncludingGravity.x + ", "
+					+ event.accelerationIncludingGravity.y + ", "
+					+ event.accelerationIncludingGravity.z
+				  );
+				  cube.rotation.x+=event.accelerationIncludingGravity.x;
+				  cube.rotation.y+=event.accelerationIncludingGravity.y;
+				}
+			
+				render();
 			});
 			
 		</script>
@@ -125,7 +142,7 @@
 						<!-- Dev Tab -->
 							<article id="Dev">
 								<section>
-									<h3 class="major">Code snippets loaded from github.</h3>
+									<h3 class="major">Code snippets loaded from Bitbucket.</h3>
 									<h4>Quote:</h4>
 									<blockquote> "Our senses enable us to perceive only a minute portion of the outside world." - Nikola Tesla</blockquote>
 									<hr />
@@ -170,6 +187,6 @@
 			</div>
 
 		<!-- BG -->
-			<div id="bg"></div>
+		<div id="bg"></div>
 	</body>
 </html>
