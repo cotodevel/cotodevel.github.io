@@ -24,22 +24,28 @@
 				<!-- ZIP format: https://bitbucket.org/Coto88/newlib-nds/get/d78e5a0a425034c203e2212c3022152c5b847fff.zip -->
 				const splitString = parseLink(urlArg);
 				if(splitString.length < 6){
-					return;
+					return false;
 				}
 				var branchOwner = splitString[3];
 				var branchName = splitString[4];
 				var isCommit = splitString[5];
 				var branchID = splitString[6];
-				var URLStart = splitString[0]+"//"+splitString[2];
+				var gitHost = splitString[2];
+				var URLStart = splitString[0]+"//"+gitHost;
 				
-				var fullPathZIP = URLStart+"/"+branchOwner+"/"+branchName+"/"+"get/"+branchID+".zip";
-				var link = document.createElement("a");
-				link.download = branchName+"-"+branchID+".zip";
-				link.href = fullPathZIP;
-				document.body.appendChild(link);
-				link.click();
-				document.body.removeChild(link);
-				delete link;
+				<!-- host's whitelist -->
+				if (gitHost === 'bitbucket.org'){		
+					var fullPathZIP = URLStart+"/"+branchOwner+"/"+branchName+"/"+"get/"+branchID+".zip";
+					var link = document.createElement("a");
+					link.download = branchName+"-"+branchID+".zip";
+					link.href = fullPathZIP;
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link);
+					delete link;
+					return true;
+				}
+				return false;
 			}
 			
 			<!-- And the following example shows it's use: downloadURI("data:text/html,HelloWorld!", "helloWorld.txt"); -->
@@ -116,7 +122,10 @@
 				loadXMLDoc("ndsEWRAMZIPStorageCodeBlock2", $ndsEWRAMZIPStorage2);
 				
 				$('#buttonDownloadBitbucket').click(function() {
-					downloadFromBitbucket($('#bitbucketURL').val());
+					<!-- only process download if valid, otherwise reset to static initial value -->
+					if(downloadFromBitbucket($('#bitbucketURL').val()) == false){
+						$('#bitbucketURL').val(curbitbucketURLVal);						
+					}
 				});
 
 
