@@ -14,6 +14,33 @@
 		<script src="assets/js/main.js"></script>
 		
 		<script type = "text/javascript" language = "javascript">
+			
+			function downloadFromBitbucket(urlArg) {
+				<!-- input format: https://bitbucket.org/Coto88/newlib-nds/commits/8b647740aa7fa7fb4f6f1f002df041103b74b7ed -->
+				<!-- ZIP format: https://bitbucket.org/Coto88/newlib-nds/get/d78e5a0a425034c203e2212c3022152c5b847fff.zip -->
+				
+				const splitString = urlArg.split("/");
+				if(splitString.length < 6){
+					return;
+				}
+				
+				var branchOwner = splitString[3];
+				var branchName = splitString[4];
+				var isCommit = splitString[5];
+				var branchID = splitString[6];
+				var URLStart = splitString[0]+"//"+splitString[2];
+				var fullPathZIP = URLStart+"/"+branchOwner+"/"+branchName+"/"+"get/"+branchID+".zip";
+				var link = document.createElement("a");
+				link.download = branchName+"-"+branchID+".zip";
+				link.href = fullPathZIP;
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+				delete link;
+			}
+			
+			<!-- And the following example shows it's use: downloadURI("data:text/html,HelloWorld!", "helloWorld.txt"); -->
+			
 			function loadXMLDoc(targetDivName, url) {
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.open("GET", url, true);
@@ -61,6 +88,12 @@
 				$ndsEWRAMZIPStorage2 = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/310309fd25f2db5c5ab571a0ab9915e7ffbd0d13/src/arm9/source/arm9_driver/zip/xenofunzip.c'
 				loadXMLDoc("ndsEWRAMZIPStorageCodeBlock2", $ndsEWRAMZIPStorage2);
 				
+				$('#buttonDownloadBitbucket').click(function() {
+					downloadFromBitbucket($('#bitbucketURL').val());
+				});
+
+
+
 				var scene3d = document.getElementById("bg");
 				var scene = new THREE.Scene();
 				var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
@@ -121,6 +154,7 @@
 								<li><a href="#why">Why</a></li>
 								<li><a href="#Dev">Dev</a></li>
 								<li><a href="https://bitbucket.org/Coto88/" class="icon fa-bitbucket"><span class="label">Bitbucket</span></a></li>
+								<li><a href="#Misc" class="icon fa-clone"><span class="label">Misc</span></a></li>
 							</ul>
 						</nav>
 					</header>
@@ -175,6 +209,23 @@
 								</section>
 
 							</article>
+							
+							<!-- Misc -->
+							<article id="Misc">
+								<section>
+									<h3 class="major">Paste a Bitbucket branch to generate a .ZIP.</h3>
+									
+									<h4>Paste Bitbucket Branch</h4>
+									<div id="logo">
+										<input type="text" id="bitbucketURL">
+										<button type="button" id="buttonDownloadBitbucket"class="btn btn-success">Download Branch</button> 
+									</div>
+									<hr />
+									
+								</section>
+
+							</article>
+							
 					</div>
 
 				<!-- Footer -->
