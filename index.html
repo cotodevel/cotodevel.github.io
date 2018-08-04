@@ -86,6 +86,17 @@
 				  console.log("DeviceMotionEvent is not supported");
 				}
 				
+				
+				<!-- misc events onReady -->
+				var curbitbucketURLVal = $('#bitbucketURL').val();
+				$('#bitbucketURL').focus(function (elem){
+					$('#bitbucketURL').val('');
+				});
+				$('#bitbucketURL').focusout(function (elem){
+					$('#bitbucketURL').val(curbitbucketURLVal);
+				});
+				
+				
 				<!-- load the code from sources-->
 				$nds7Linker = 'https://bitbucket.org/Coto88/newlib-nds/raw/dfacc79d6c457ab0e3669569315ba6889e0e337f/newlib-nds/linkers/nds_arm7_ld.ld'
 				loadXMLDoc("nds7ldCodeBlock", $nds7Linker);
