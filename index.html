@@ -53,19 +53,30 @@
 				};
 				xmlhttp.send();
 			}
-			
-			
 				
 			$(document).ready(function(){
 				<!-- reload page if resized -->
-				$(window).bind('resize', function(e)
-				{
-				  if (window.RT) clearTimeout(window.RT);
-				  window.RT = setTimeout(function()
-				  {
-					this.location.reload(false); /* false to get page from cache */
-				  }, 100);
+				var rtime;
+				var timeout = false;
+				var delta = 200;
+				
+				$(window).resize(function() {
+					rtime = new Date();
+					if (timeout === false) {
+						timeout = true;
+						setTimeout(resizeend, delta);
+					}
 				});
+
+				function resizeend() {
+					if (new Date() - rtime < delta) {
+						setTimeout(resizeend, delta);
+					} else {
+						timeout = false;
+						this.location.reload(false); /* false to get page from cache */
+					}               
+				}
+				
 				
 				<!-- bind accelerometer handler -->
 				if(window.DeviceMotionEvent){
