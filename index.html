@@ -29,15 +29,15 @@
 				var branchOwner = splitString[3];
 				var branchName = splitString[4];
 				var isCommit = splitString[5];
-				var branchID = splitString[6];
+				var branchID = splitString[6].split('?at');
 				var gitHost = splitString[2];
 				var URLStart = splitString[0]+"//"+gitHost;
 				
-				<!-- host's whitelist -->
-				if (gitHost === 'bitbucket.org'){		
-					var fullPathZIP = URLStart+"/"+branchOwner+"/"+branchName+"/"+"get/"+branchID+".zip";
+				<!-- host's whitelist & proper bitbucket commit URL format-->
+				if ((gitHost === 'bitbucket.org') && (branchID.length > 1)){		
+					var fullPathZIP = URLStart+"/"+branchOwner+"/"+branchName+"/"+"get/"+branchID[0]+".zip";
 					var link = document.createElement("a");
-					link.download = branchName+"-"+branchID+".zip";
+					link.download = branchName+"-"+branchID[0]+".zip";
 					link.href = fullPathZIP;
 					document.body.appendChild(link);
 					link.click();
