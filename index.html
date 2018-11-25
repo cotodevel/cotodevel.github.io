@@ -64,7 +64,7 @@
 			}
 				
 			$(document).ready(function(){
-				<!-- reload page if resized -->
+				<!-- reload BG if resized -->
 				var rtime;
 				var timeout = false;
 				var delta = 700;
@@ -82,7 +82,7 @@
 						setTimeout(resizeend, delta);
 					} else {
 						timeout = false;
-						this.location.reload(false); /* false to get page from cache */
+						updateCubeBackground(window.innerWidth,window.innerHeight);
 					}               
 				}
 				
@@ -128,19 +128,35 @@
 					}
 				});
 
-
-
-				var scene3d = document.getElementById("bg");
-				var scene = new THREE.Scene();
-				var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
-				var renderer = new THREE.WebGLRenderer();
-				renderer.setSize(window.innerWidth, window.innerHeight);
-				var geometry = new THREE.BoxGeometry(1400, 1400, 1400, 10, 10, 10);
-				var material = new THREE.MeshBasicMaterial({color: 0x444444, wireframe: true});
-				var cube = new THREE.Mesh(geometry, material);
-				scene.add(cube);
-				camera.position.z = 1000;
-				scene3d.appendChild(renderer.domElement);
+				var scene3d;
+				var scene;
+				var camera;
+				var renderer;
+				var geometry;
+				var material;
+				var cube;
+				
+				function loadCubeBackground(){
+					scene3d = document.getElementById("bg");
+					scene = new THREE.Scene();
+					renderer = new THREE.WebGLRenderer();
+					geometry = new THREE.BoxGeometry(1400, 1400, 1400, 10, 10, 10);
+					material = new THREE.MeshBasicMaterial({color: 0x444444, wireframe: true});
+					cube = new THREE.Mesh(geometry, material);
+					scene.add(cube);
+					scene3d.appendChild(renderer.domElement);
+					updateCubeBackground(window.innerWidth,window.innerHeight);
+				}
+				
+				function updateCubeBackground(innerWidth,innerHeight){
+					renderer.setSize(innerWidth,innerHeight);
+					if(camera != null){
+						delete camera;
+					}
+					camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 1, 10000);
+					camera.position.z = 1000;
+				}
+				
 				function render() {
 					requestAnimationFrame(render);
 					cube.rotation.x += 0.0008;
@@ -155,7 +171,8 @@
 					+ event.accelerationIncludingGravity.z
 				  );
 				}
-			
+				
+				loadCubeBackground();
 				render();
 			});
 			
