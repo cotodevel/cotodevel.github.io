@@ -151,10 +151,7 @@
 				
 				function updateCubeBackground(innerWidth,innerHeight){
 					renderer.setSize(innerWidth,innerHeight);
-					if(camera != null){
-						delete camera;
-					}
-					camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 1, 10000);
+					camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 1, 10000);	//apparently the garbage collector automagically deletes this
 					camera.position.z = 1000;
 				}
 				
