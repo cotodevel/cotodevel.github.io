@@ -110,16 +110,16 @@
 				});
 				
 				<!-- load the code from sources-->
-				$nds7Linker = 'https://bitbucket.org/Coto88/newlib-nds/raw/master/newlib-nds/linkers/nds_arm7_ld.ld'
+				$nds7Linker = 'https://raw.githubusercontent.com/cotodevel/newlib-nds/refs/heads/TGDS1.65/newlib-nds/linkers/dsi_arm7_ld_stage2.ld'
 				loadXMLDoc("nds7ldCodeBlock", $nds7Linker);
 				
-				$ndsDSWNIFINetplay = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/master/src/common/hardware/dswnifi_lib.c'
+				$ndsDSWNIFINetplay = 'https://raw.githubusercontent.com/cotodevel/toolchaingenericds/refs/heads/TGDS1.65/src/common/libutils/dswnifi_lib.c'
 				loadXMLDoc("ndsNetplayDSWnifiCodeBlock", $ndsDSWNIFINetplay);
 				
-				$ndsEWRAMZIPStorage1 = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/master/src/arm9/source/zip/zipSwapStack.S'
+				$ndsEWRAMZIPStorage1 = 'https://raw.githubusercontent.com/cotodevel/toolchaingenericds/refs/heads/TGDS1.65/src/common/libutils/arm9/source/zip/minizip.c'
 				loadXMLDoc("ndsEWRAMZIPStorageCodeBlock1", $ndsEWRAMZIPStorage1);
 				
-				$ndsEWRAMZIPStorage2 = 'https://bitbucket.org/Coto88/toolchaingenericds/raw/master/src/arm9/source/zip/xenofunzip.c'
+				$ndsEWRAMZIPStorage2 = 'https://raw.githubusercontent.com/cotodevel/toolchaingenericds/refs/heads/TGDS1.65/src/common/libutils/arm9/source/zip/xenofunzip.c'
 				loadXMLDoc("ndsEWRAMZIPStorageCodeBlock2", $ndsEWRAMZIPStorage2);
 				
 				$('#buttonDownloadBitbucket').click(function() {
@@ -293,14 +293,20 @@
 							
 							<!-- News -->
 							<article id="News">
+								
 								<section>
 									<h3 class="major">Developer Notes.</h3>
+									<h4>May 4th 2026:</h4>
+									<blockquote> TGDS Software has been fixed on NTR/TWL hardware. It'll work fine for you. And it's tested. </blockquote>
+									<blockquote> If you're having problems trying to run TGDS Software, make sure you read (<a href="https://github.com/cotodevel/toolchaingenericds/tree/TGDS1.65">TGDS Documentation</a>. </blockquote>
+									<blockquote> For updates, requests or improvements, you can always (<a href="https://github.com/cotodevel/toolchaingenericds/issues">join the issue tracker</a>) </blockquote>
+									<hr />
+									
 									<h4>June 4 2025:</h4>
 									<blockquote> I've migrated repositories from bitbucket int Github, as they seem to have locked accounts with over 1GB per repository. </blockquote>
 									<blockquote> There's quite some development on NDS projects, "Issues"  tab per repository will document Use Cases, on the AGILE methodology framework, along its work done. </blockquote>
 									<blockquote> Also the ToolchainGenericDS SDK got upgrades. But I need a DSi (XL) motherboard to port said fixes from NTR mode to TWL. (<a href="https://github.com/cotodevel/ToolchainGenericDS">Use Case</a>) </blockquote>
 									<hr />
-									
 								</section>
 
 							</article>
